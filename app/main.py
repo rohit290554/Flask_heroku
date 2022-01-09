@@ -1,19 +1,26 @@
-import urllib.request
-
-import requests
-from flask import Flask as flask
 import json
 
-app = flask(__name__)
+import requests
+from flask import Flask as flask, render_template, request
+
+app = flask(__name__, template_folder='templates')
 
 
-@app.route("/")
+@app.route('/')
+def my_form():
+    return render_template('Home.html')
+
+
+@app.route("/", methods=['GET', 'POST'])
 def home_view():
+    # form = cgi.FieldStorage()
+    # external_ip = form.getvalue('text')
     ipur = 'https://ipapi.co/'
     ipurr = '/json/'
-    external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
+    # external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
+    external_ip = request.form['external_ip']
     print('Target IP Addr is : ' + external_ip)
-    ip_address = external_ip
+    # ip_address = external_ip
     # URL to send the request to
     request_url = ipur + external_ip + ipurr
     # Send request and decode the result
@@ -22,9 +29,5 @@ def home_view():
     result = json.loads(result)
     test = json.dumps(result)
     print(test)
-    return test
-
-
-@app.route("/geoip")
-def home_():
-    return 'test'
+    print(external_ip)
+    return render_template('op.html', text=test)
