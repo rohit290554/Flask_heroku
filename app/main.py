@@ -29,7 +29,7 @@ def home_view():
     test = json.dumps(result)
     print(test)
     print(external_ip)
-    return render_template('op.html', text=test)
+    return render_template('op.html', text=test, result=result)
 
 
 @app.route("/ip")

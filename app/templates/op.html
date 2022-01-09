@@ -6,6 +6,11 @@
   </head>
 <body>
 <h1 class="title">Geo IP Tracker! </h1>
-<p>{{text}}</p>
+<h3> Below is your results </h3>
+<div
+{%for key, value in result.items()%}
+<p>{{ key, ' : ', value}}</p>
+{% endfor %}
+</div>
 </body>
 </html>
