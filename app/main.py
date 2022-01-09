@@ -1,5 +1,4 @@
 import json
-
 import requests
 from flask import Flask as flask, render_template, request
 
@@ -31,3 +30,10 @@ def home_view():
     print(test)
     print(external_ip)
     return render_template('op.html', text=test)
+
+
+@app.route("/ip")
+def index():
+    ip_address = request.remote_addr
+    return "Requester IP: " + ip_address
+
